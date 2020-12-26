@@ -1,0 +1,24 @@
+{
+  "name": "pn",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@xstate/inspect": "^0.3.0",
+    "lodash-es": "^4.17.20",
+    "vue": "^3.0.4",
+    "xstate": "^4.15.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@types/lodash-es": "^4.17.4",
+    "@vue/compiler-sfc": "^3.0.4",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "prettier": "^2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vite": "^1.0.0-rc.13"
+  }
+}
