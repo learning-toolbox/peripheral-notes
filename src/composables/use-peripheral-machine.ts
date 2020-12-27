@@ -66,7 +66,7 @@ const peripheralMachine = createMachine<Context>(
         on: {
           FOCUS: {
             target: 'editting',
-            actions: ['setFocusedNotes'],
+            actions: ['initializeNotes'],
           },
         },
       },
@@ -76,7 +76,7 @@ const peripheralMachine = createMachine<Context>(
             actions: ['updateNoteMarkdown'],
           },
           FOCUS: {
-            actions: ['setFocusedNotes'],
+            actions: ['focusNote'],
           },
         },
       },
@@ -84,7 +84,7 @@ const peripheralMachine = createMachine<Context>(
   },
   {
     actions: {
-      setFocusedNotes: assign({
+      initializeNotes: assign({
         focusedNotes({ notes, focusedNotes }, event) {
           const updatedFocusedNotes: FocusedNotes = {
             center: event.id,
@@ -110,6 +110,17 @@ const peripheralMachine = createMachine<Context>(
           }
 
           return updatedFocusedNotes;
+        },
+      }),
+      focusNote: assign({
+        focusedNotes({ focusedNotes }, event) {
+          const [position] = Object.entries(focusedNotes).find(([_, id]) => id === event.id) || [];
+
+          return {
+            ...focusedNotes,
+            center: event.id,
+            [position as Position]: focusedNotes.center,
+          };
         },
       }),
       updateNoteMarkdown: assign({

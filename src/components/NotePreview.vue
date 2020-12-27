@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="{ 'bg-gray-200': isNoteFocued }"
-    class="p-2 rounded-lg hover:bg-gray-300 focus:bg-gray-300"
+    :class="{ 'border-r-4 rounded-r-none': isNoteFocued }"
+    class="p-2 rounded-lg hover:bg-gray-300 focus:bg-gray-300 border-indigo-400"
     tabindex="0"
     @click="send({ type: 'FOCUS', id })"
   >

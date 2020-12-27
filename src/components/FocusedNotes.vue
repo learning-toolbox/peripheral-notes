@@ -1,12 +1,6 @@
 <template>
-  <div v-resize="onResize" class="relative h-full w-full">
-    <Note
-      v-for="(id, position) in focusedNotes"
-      :id="id"
-      :key="id"
-      :position="position"
-      :dimensions="dimensions"
-    />
+  <div class="relative h-full w-full max-h-full max-w-full">
+    <Note v-for="note in focusedNotes" :id="note.id" :key="note.id" :position="note.position" />
   </div>
 </template>
 
@@ -14,15 +8,16 @@
 import { computed, shallowRef } from 'vue';
 import Note from './Note.vue';
 import { usePeripheralMachine } from '../composables/use-peripheral-machine';
-import { directive as resize } from '../utils/resize';
 
 const { state, send } = usePeripheralMachine();
 
-const dimensions = shallowRef({ height: 0, width: 0 });
-
-const focusedNotes = computed(() => state.value.context.focusedNotes);
-
-function onResize({ height, width }: any) {
-  dimensions.value = { height, width };
-}
+// sort the notes so that they do not move as their position changes. This will allow transitions to work
+const focusedNotes = computed(() =>
+  Object.entries(state.value.context.focusedNotes)
+    .map(([position, id]) => ({
+      id: id!,
+      position,
+    }))
+    .sort(({ id: id1 }, { id: id2 }) => id1.localeCompare(id2!))
+);
 </script>
