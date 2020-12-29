@@ -2,7 +2,7 @@ import { inspect } from '@xstate/inspect';
 import { assign, createMachine } from 'xstate';
 import { useMachine } from './use-machine';
 
-inspect({ iframe: false });
+// inspect({ iframe: false });
 
 export type NoteId = string;
 
